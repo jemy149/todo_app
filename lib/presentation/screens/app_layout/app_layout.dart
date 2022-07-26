@@ -41,7 +41,7 @@ class HomeLayout extends StatelessWidget {
             backgroundColor: lightBlue,
             key: scaffoldKey,
             appBar: AppBar(
-                backgroundColor: darkBlue,
+                backgroundColor: primaryColor,
                 title: Center(
                   child: DefaultText(
                     text: cubit.titles[cubit.currentIndex],
@@ -57,7 +57,7 @@ class HomeLayout extends StatelessWidget {
               fallback: (context) => const Center(child: CircularProgressIndicator()),
             ),
             floatingActionButton: FloatingActionButton(
-              backgroundColor: darkBlue,
+              backgroundColor: primaryColor,
               onPressed: (){
                 if(cubit.isBottomSheetShown) {
                   if (formKey.currentState!.validate()) {
@@ -76,7 +76,7 @@ class HomeLayout extends StatelessWidget {
                         Wrap(
                           children: [
                             Container(
-                              color: darkBlue,
+                              color: primaryColor,
                               padding: EdgeInsets.symmetric(vertical: 2.h,
                                   horizontal: 3.w),
                               child: Form(
@@ -195,7 +195,7 @@ class HomeLayout extends StatelessWidget {
                                                       gravity: ToastGravity.BOTTOM,
                                                       timeInSecForIosWeb: 1,
                                                       backgroundColor: Colors.red,
-                                                      textColor: darkBlue,
+                                                      textColor: primaryColor,
                                                       fontSize: 16.0
                                                   );
                                                 }
@@ -215,7 +215,7 @@ class HomeLayout extends StatelessWidget {
                                       padding: EdgeInsets.only(top: 2.h),
                                       child: DecoratedBox(
                                         decoration: BoxDecoration(
-                                          color: darkBlue,
+                                          color: primaryColor,
                                           border: Border.all(color: black, width: 0.3),
                                           borderRadius: BorderRadius.circular(10),
                                         ),
@@ -223,7 +223,7 @@ class HomeLayout extends StatelessWidget {
                                           builder: (BuildContext context, state) {
                                             return DropdownButton(
                                                 isExpanded: true,
-                                                dropdownColor: darkBlue,
+                                                dropdownColor: primaryColor,
                                                 icon: Padding(
                                                   padding: EdgeInsetsDirectional.only(end: 3.w),
                                                   child: const Icon(Icons.keyboard_arrow_down, color: lightBlue,),
@@ -265,7 +265,7 @@ class HomeLayout extends StatelessWidget {
                 cubit.changeIndex(index);
               },
               type: BottomNavigationBarType.fixed,
-              backgroundColor: darkBlue,
+              backgroundColor: primaryColor,
               selectedItemColor: blue,
               unselectedItemColor: lightBlue,
               items: const [

@@ -24,7 +24,7 @@ class DefaultMaterialButton extends StatelessWidget {
       this.text,
       this.width = double.infinity,
       this.isUpperCase = true,
-      this.background = darkBlue,
+      this.background = primaryColor,
       this.radius = 30,
       this.child,
       this.splashColor,

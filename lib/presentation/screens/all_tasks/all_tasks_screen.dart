@@ -17,7 +17,7 @@ class AllTasksScreen extends StatelessWidget {
 
         var tasks = AppCubit.get(context).allTasks;
 
-        return TaskBuilder(tasks: tasks, noTasks: 'No Tasks Yet..', taskType: 'all');
+        return TaskBuilder(tasks: tasks, noTasks: 'No Tasks Added..', taskType: 'all');
       },
     );
   }

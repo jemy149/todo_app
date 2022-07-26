@@ -5,7 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:todo_app/business_logic/cubit/states.dart';
 import 'package:timezone/timezone.dart' as time_zone;
-import '../../constants/flutter_local_notifications.dart';
+import '../../data/local/flutter_local_notifications.dart';
 import '../../presentation/screens/all_tasks/all_tasks_screen.dart';
 import '../../presentation/screens/completed_tasks/completed_tasks_screen.dart';
 import '../../presentation/screens/favourite_tasks/favorite_tasks_screen.dart';
@@ -27,9 +27,9 @@ class AppCubit extends Cubit<AppStates>{
 
   List<String> titles = [
     'All Tasks',
-    'Uncompleted Tasks',
-    'Completed Tasks',
-    'Favorite Tasks',
+    'Uncompleted',
+    'Completed',
+    'Favorite',
   ];
 
   void changeIndex(int index){
@@ -186,7 +186,6 @@ class AppCubit extends Cubit<AppStates>{
       TimeOfDay selectedStartTime,
       String selectedReminder
       ){
-
     int day = selectedDate.day;
     int hour = selectedStartTime.hour;
     int minute = selectedStartTime.minute;

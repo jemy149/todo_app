@@ -43,7 +43,7 @@ class NotificationService {
       tz.TZDateTime.now(tz.local).add(Duration(seconds: seconds)),
       const NotificationDetails(
         android: AndroidNotificationDetails(
-            "MyTO_DOList@scorpionA", "MyTO_DOListChannel",
+            "SG'sTO_DOList@saidgamal", "SG'sTO_DOListChannel",
             importance: Importance.max,
             priority: Priority.max,
             ticker: 'ticker',

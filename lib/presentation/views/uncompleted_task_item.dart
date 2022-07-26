@@ -17,8 +17,8 @@ class DoneTaskItem extends StatelessWidget {
     return Dismissible(
       key: Key(model['id'].toString()),
       child: InkWell(
-        splashColor: darkBlue,
-        highlightColor: darkBlue,
+        splashColor: primaryColor,
+        highlightColor: primaryColor,
         onTap: (){
           Fluttertoast.showToast(
               msg: "Long touch for Title editing, Swipe left or right to delete",
@@ -51,7 +51,7 @@ class DoneTaskItem extends StatelessWidget {
                 width: 25.w,
                 padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 3.w),
                 decoration: const BoxDecoration(
-                  color: darkBlue,
+                  color: primaryColor,
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.all(Radius.circular(15.0)),
                 ),
@@ -141,7 +141,7 @@ class DoneTaskItem extends StatelessWidget {
 
                           Icons.check_circle,
 
-                          color: darkBlue,
+                          color: primaryColor,
 
                         ),
 
@@ -185,7 +185,7 @@ class DoneTaskItem extends StatelessWidget {
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 1,
             backgroundColor: Colors.green,
-            textColor: darkBlue,
+            textColor: primaryColor,
             fontSize: 14.sp
         );
       },

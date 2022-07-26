@@ -22,13 +22,13 @@ class EditTaskTitleDialog extends StatelessWidget {
     titleController = TextEditingController(text: '${model['title']}');
 
     return Dialog(
-      backgroundColor: darkBlue,
+      backgroundColor: primaryColor,
         shape: RoundedRectangleBorder(
             borderRadius:
             BorderRadius.circular(25.0)),
       child: Container(
         decoration: BoxDecoration(
-          color: darkBlue,
+          color: primaryColor,
           borderRadius: BorderRadius.circular(20.0),
         ),
         padding: EdgeInsets.symmetric(vertical: 2.h,
@@ -70,7 +70,7 @@ class EditTaskTitleDialog extends StatelessWidget {
                               gravity: ToastGravity.BOTTOM,
                               timeInSecForIosWeb: 1,
                               backgroundColor: Colors.green,
-                              textColor: darkBlue,
+                              textColor: primaryColor,
                               fontSize: 14.sp
                           );
                           Navigator.of(context).pop();
