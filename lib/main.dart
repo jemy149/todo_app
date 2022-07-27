@@ -1,12 +1,10 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:todo_app/data/local/flutter_local_notifications.dart';
 import 'package:todo_app/presentation/router/app_router.dart';
 import 'business_logic/cubit/cubit.dart';
-import 'package:timezone/timezone.dart' as tz;
-import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/data/latest.dart' as time_zone;
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +34,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     setState(() {
-      tz.initializeTimeZones();
+      time_zone.initializeTimeZones();
     });
   }
 

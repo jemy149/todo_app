@@ -294,6 +294,8 @@ class HomeLayout extends StatelessWidget {
               ),
             ),
             bottomNavigationBar: BottomNavyBar(
+              itemCornerRadius: 50,
+              animationDuration: const Duration(seconds: 5),
               backgroundColor: primaryColor,
               showElevation: true,
               items: [

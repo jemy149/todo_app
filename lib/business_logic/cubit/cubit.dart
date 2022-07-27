@@ -1,10 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:todo_app/business_logic/cubit/states.dart';
-import 'package:timezone/timezone.dart' as time_zone;
 import '../../data/local/flutter_local_notifications.dart';
 import '../../presentation/screens/all_tasks/all_tasks_screen.dart';
 import '../../presentation/screens/completed_tasks/completed_tasks_screen.dart';
@@ -82,7 +80,7 @@ class AppCubit extends Cubit<AppStates>{
 
   insertToDatabase({required String title, required String startTime,  required String endTime, required String date, required String reminder}) async{
     if(endTime == ''){
-      endTime == '--';
+      endTime = '***';
     }
     await database.transaction((txn) {
       return txn.rawInsert('INSERT INTO tasks(title, date, startTime, endTime, reminder, status) VALUES("$title", "$date", "$startTime", "$endTime", "$reminder", "uncompleted")'
