@@ -15,7 +15,7 @@ class CompletedTasksScreen extends StatelessWidget {
 
         var tasks = AppCubit.get(context).completedTasks;
 
-        return TaskBuilder(tasks: tasks, noTasks: 'No Completed Tasks Yet..', taskType: 'completed');
+        return EmptyScreen(tasks: tasks, noTasks: '', taskType: 'completed');
       },
     );
   }

@@ -15,7 +15,7 @@ class FavoriteTasksScreen extends StatelessWidget {
 
         var tasks = AppCubit.get(context).favoriteTasks;
 
-        return TaskBuilder(tasks: tasks, noTasks: 'No Favorite Tasks..', taskType: 'favorite');
+        return EmptyScreen(tasks: tasks, noTasks: '', taskType: 'favorite');
       },
     );
   }

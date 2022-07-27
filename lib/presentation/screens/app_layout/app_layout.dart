@@ -303,31 +303,31 @@ class HomeLayout extends StatelessWidget {
                       color: Colors.tealAccent,
                     ),
                     title: const Text(
-                      'All',
+                      'Tasks',
                       style: TextStyle(
-                        color: Colors.tealAccent,
+                        color: Colors.teal,
                       ),
                     )),
                 BottomNavyBarItem(
                     icon: const Icon(
-                      Icons.close_outlined,
+                      Icons.check_box_outline_blank_rounded,
                       color: Colors.tealAccent,
                     ),
                     title: const Text(
-                      'Uncompleted',
+                      'Un-Done',
                       style: TextStyle(
-                        color: Colors.tealAccent,
+                        color: Colors.teal,
                       ),
                     )),
                 BottomNavyBarItem(
                     icon: const Icon(
-                      Icons.check_circle,
+                      Icons.check_box_rounded,
                       color: Colors.tealAccent,
                     ),
                     title: const Text(
-                      'Completed',
+                      'Done',
                       style: TextStyle(
-                        color: Colors.tealAccent,
+                        color: Colors.teal,
                       ),
                     )),
                 BottomNavyBarItem(
@@ -338,7 +338,7 @@ class HomeLayout extends StatelessWidget {
                     title: const Text(
                       'Favourites',
                       style: TextStyle(
-                        color: Colors.tealAccent,
+                        color: Colors.teal,
                       ),
                     )),
               ],
