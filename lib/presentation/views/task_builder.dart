@@ -33,11 +33,7 @@ class TaskBuilder extends StatelessWidget {
             return TaskItem(model: tasks[index]);
           }
         },
-        separatorBuilder: (context, index) => Row(
-          children: [
-            Expanded(child: Divider(height: 2.h, color: Colors.black45)),
-          ],
-        ),
+        separatorBuilder: (context, index) => const SizedBox(),
         itemCount: tasks.length,
       ),
       fallback: (context) => Center(

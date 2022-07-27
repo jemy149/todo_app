@@ -1,4 +1,4 @@
-
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,13 +6,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 import 'package:todo_app/presentation/widgets/default_text.dart';
+
 import '../../../business_logic/cubit/cubit.dart';
 import '../../../business_logic/cubit/states.dart';
 import '../../styles/colors.dart';
 import '../../widgets/default_form_field.dart';
 
 class HomeLayout extends StatelessWidget {
-
   var scaffoldKey = GlobalKey<ScaffoldState>();
   var formKey = GlobalKey<FormState>();
   var titleController = TextEditingController();
@@ -20,7 +20,8 @@ class HomeLayout extends StatelessWidget {
   var endTimeController = TextEditingController();
   var dateController = TextEditingController();
   TimeOfDay initialStartTime = TimeOfDay.now();
-  TimeOfDay initialEndTime = TimeOfDay.fromDateTime(DateTime.now().add(const Duration(minutes: 1)));
+  TimeOfDay initialEndTime =
+      TimeOfDay.fromDateTime(DateTime.now().add(const Duration(minutes: 1)));
   TimeOfDay? selectedStartTime;
   TimeOfDay? selectedEndTime;
   DateTime? selectedDate;
@@ -28,38 +29,29 @@ class HomeLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppStates>(
-        listener: (BuildContext context, AppStates state) {
-          if(state is AppInsertTaskState){
-            Navigator.pop(context);
-          }
-        },
-        builder: (BuildContext context, AppStates state) {
+      listener: (BuildContext context, AppStates state) {
+        if (state is AppInsertTaskState) {
+          Navigator.pop(context);
+        }
+      },
+      builder: (BuildContext context, AppStates state) {
+        AppCubit cubit = AppCubit.get(context);
 
-          AppCubit cubit = AppCubit.get(context);
-
-          return Scaffold(
+        return SafeArea(
+          child: Scaffold(
             backgroundColor: lightBlue,
             key: scaffoldKey,
-            appBar: AppBar(
-                backgroundColor: primaryColor,
-                title: Center(
-                  child: DefaultText(
-                    text: cubit.titles[cubit.currentIndex],
-                    color: lightBlue,
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                  ),
-                )
-            ),
             body: ConditionalBuilder(
               condition: state is! AppGetDBLoadingState,
-              builder: (BuildContext context) => cubit.screens[cubit.currentIndex],
-              fallback: (context) => const Center(child: CircularProgressIndicator()),
+              builder: (BuildContext context) =>
+                  cubit.screens[cubit.currentIndex],
+              fallback: (context) =>
+                  const Center(child: CircularProgressIndicator()),
             ),
             floatingActionButton: FloatingActionButton(
               backgroundColor: primaryColor,
-              onPressed: (){
-                if(cubit.isBottomSheetShown) {
+              onPressed: () {
+                if (cubit.isBottomSheetShown) {
                   if (formKey.currentState!.validate()) {
                     cubit.insertToDatabase(
                       title: titleController.text,
@@ -68,17 +60,18 @@ class HomeLayout extends StatelessWidget {
                       date: dateController.text,
                       reminder: cubit.dropDownValue,
                     );
-                    cubit.setReminder(
-                        titleController.text, selectedDate!, selectedStartTime!, cubit.dropDownValue);
+                    cubit.settingReminder(titleController.text, selectedDate!,
+                        selectedStartTime!, cubit.dropDownValue);
                   }
-                  } else {
-                    scaffoldKey.currentState!.showBottomSheet((context) =>
-                        Wrap(
+                } else {
+                  scaffoldKey.currentState!
+                      .showBottomSheet(
+                        (context) => Wrap(
                           children: [
                             Container(
                               color: primaryColor,
-                              padding: EdgeInsets.symmetric(vertical: 2.h,
-                                  horizontal: 3.w),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 2.h, horizontal: 3.w),
                               child: Form(
                                 key: formKey,
                                 child: Column(
@@ -97,23 +90,29 @@ class HomeLayout extends StatelessWidget {
                                       labelText: 'Task Title',
                                       textColor: white,
                                       prefixIcon: const Icon(
-                                        Icons.title_outlined, color: lightBlue,),
+                                        Icons.title_outlined,
+                                        color: lightBlue,
+                                      ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.symmetric(vertical: 2.h),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2.h),
                                       child: DefaultFormField(
                                         controller: dateController,
                                         keyboardType: TextInputType.datetime,
                                         onTap: () {
-                                          showDatePicker(context: context,
+                                          showDatePicker(
+                                            context: context,
                                             initialDate: DateTime.now(),
                                             firstDate: DateTime.now(),
-                                            lastDate: DateTime.parse('2024-01-07'),
+                                            lastDate:
+                                                DateTime.parse('2024-01-07'),
                                           ).then((value) {
                                             selectedDate = value;
-                                            dateController.text = DateFormat.yMMMd()
-                                                .format(value!)
-                                                .toString();
+                                            dateController.text =
+                                                DateFormat.yMMMd()
+                                                    .format(value!)
+                                                    .toString();
                                           });
                                         },
                                         validator: (value) {
@@ -126,7 +125,8 @@ class HomeLayout extends StatelessWidget {
                                         textColor: white,
                                         prefixIcon: const Icon(
                                           Icons.date_range_outlined,
-                                          color: lightBlue,),
+                                          color: lightBlue,
+                                        ),
                                       ),
                                     ),
                                     Row(
@@ -144,8 +144,9 @@ class HomeLayout extends StatelessWidget {
                                                 ).then((value) {
                                                   selectedStartTime = value;
                                                   startTimeController.text =
-                                                      selectedStartTime!.format(
-                                                          context).toString();
+                                                      selectedStartTime!
+                                                          .format(context)
+                                                          .toString();
                                                 });
                                               },
                                               validator: (value) {
@@ -157,8 +158,11 @@ class HomeLayout extends StatelessWidget {
                                               labelText: 'Start Time',
                                               textColor: white,
                                               prefixIcon: const Icon(
-                                                Icons.timer, color: lightBlue,),
-                                              keyboardType: TextInputType.datetime,
+                                                Icons.timer,
+                                                color: lightBlue,
+                                              ),
+                                              keyboardType:
+                                                  TextInputType.datetime,
                                             ),
                                           ),
                                         ),
@@ -175,29 +179,33 @@ class HomeLayout extends StatelessWidget {
                                                         .toDouble()) {
                                                   selectedEndTime = value;
                                                   endTimeController.text =
-                                                      selectedEndTime!.format(
-                                                          context).toString();
-                                                } else if (value.hour.toDouble() ==
-                                                    selectedStartTime!.hour
-                                                        .toDouble()
-                                                    && value.minute.toDouble() >=
+                                                      selectedEndTime!
+                                                          .format(context)
+                                                          .toString();
+                                                } else if (value.hour
+                                                            .toDouble() ==
+                                                        selectedStartTime!.hour
+                                                            .toDouble() &&
+                                                    value.minute.toDouble() >=
                                                         selectedStartTime!.minute
                                                             .toDouble()) {
                                                   selectedEndTime = value;
                                                   endTimeController.text =
-                                                      selectedEndTime!.format(
-                                                          context).toString();
+                                                      selectedEndTime!
+                                                          .format(context)
+                                                          .toString();
                                                 } else {
                                                   Fluttertoast.showToast(
-                                                      msg: "End Time can't be before Start Time",
-                                                      toastLength: Toast
-                                                          .LENGTH_SHORT,
-                                                      gravity: ToastGravity.BOTTOM,
+                                                      msg:
+                                                          "End Time can't be before Start Time",
+                                                      toastLength:
+                                                          Toast.LENGTH_SHORT,
+                                                      gravity:
+                                                          ToastGravity.BOTTOM,
                                                       timeInSecForIosWeb: 1,
                                                       backgroundColor: Colors.red,
                                                       textColor: primaryColor,
-                                                      fontSize: 16.0
-                                                  );
+                                                      fontSize: 16.0);
                                                 }
                                               });
                                             },
@@ -205,7 +213,8 @@ class HomeLayout extends StatelessWidget {
                                             textColor: white,
                                             prefixIcon: const Icon(
                                               Icons.timer_off_outlined,
-                                              color: lightBlue,),
+                                              color: lightBlue,
+                                            ),
                                             keyboardType: TextInputType.datetime,
                                           ),
                                         ),
@@ -216,7 +225,8 @@ class HomeLayout extends StatelessWidget {
                                       child: DecoratedBox(
                                         decoration: BoxDecoration(
                                           color: primaryColor,
-                                          border: Border.all(color: black, width: 0.3),
+                                          border: Border.all(
+                                              color: black, width: 0.3),
                                           borderRadius: BorderRadius.circular(10),
                                         ),
                                         child: BlocBuilder<AppCubit, AppStates>(
@@ -225,21 +235,32 @@ class HomeLayout extends StatelessWidget {
                                                 isExpanded: true,
                                                 dropdownColor: primaryColor,
                                                 icon: Padding(
-                                                  padding: EdgeInsetsDirectional.only(end: 3.w),
-                                                  child: const Icon(Icons.keyboard_arrow_down, color: lightBlue,),
+                                                  padding:
+                                                      EdgeInsetsDirectional.only(
+                                                          end: 3.w),
+                                                  child: const Icon(
+                                                    Icons.keyboard_arrow_down,
+                                                    color: lightBlue,
+                                                  ),
                                                 ),
                                                 value: cubit.dropDownValue,
-                                                items: cubit.dropDownListItems.map((String items) {
+                                                items: cubit.dropDownListItems
+                                                    .map((String items) {
                                                   return DropdownMenuItem(
                                                       value: items,
                                                       child: Padding(
-                                                        padding: EdgeInsetsDirectional.only(start: 3.w),
-                                                        child: DefaultText(text: items, color: lightBlue,),
-                                                      )
-                                                  );
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .only(start: 3.w),
+                                                        child: DefaultText(
+                                                          text: items,
+                                                          color: lightBlue,
+                                                        ),
+                                                      ));
                                                 }).toList(),
-                                                onChanged: (String? newValue) => cubit.changeDropDownListValue(newValue!)
-                                            );
+                                                onChanged: (String? newValue) =>
+                                                    cubit.changeDropDownListValue(
+                                                        newValue!));
                                           },
                                         ),
                                       ),
@@ -250,53 +271,85 @@ class HomeLayout extends StatelessWidget {
                             ),
                           ],
                         ),
-                      elevation: 20.0,
-                    ).closed.then((value) {
-                      cubit.changeBSState(isShow: false, icon: Icons.edit,);
-                    });
-                    cubit.changeBSState(isShow: true, icon: Icons.add,);
-                  }
+                        elevation: 20.0,
+                      )
+                      .closed
+                      .then((value) {
+                    cubit.changeBSState(
+                      isShow: false,
+                      icon: Icons.add_box,
+                      color: Colors.teal
+                    );
+                  });
+                  cubit.changeBSState(
+                    isShow: true,
+                    color: Colors.teal,
+                    icon: Icons.add,
+                  );
+                }
               },
-              child: Icon(cubit.fabIcon, color: lightBlue,),
+              child: Icon(
+                cubit.fabIcon,
+                color: lightBlue,
+              ),
             ),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: cubit.currentIndex,
-              onTap: (index){
+            bottomNavigationBar: BottomNavyBar(
+              backgroundColor: primaryColor,
+              showElevation: true,
+              items: [
+                BottomNavyBarItem(
+                    icon: const Icon(
+                      Icons.menu,
+                      color: Colors.tealAccent,
+                    ),
+                    title: const Text(
+                      'All',
+                      style: TextStyle(
+                        color: Colors.tealAccent,
+                      ),
+                    )),
+                BottomNavyBarItem(
+                    icon: const Icon(
+                      Icons.close_outlined,
+                      color: Colors.tealAccent,
+                    ),
+                    title: const Text(
+                      'Uncompleted',
+                      style: TextStyle(
+                        color: Colors.tealAccent,
+                      ),
+                    )),
+                BottomNavyBarItem(
+                    icon: const Icon(
+                      Icons.check_circle,
+                      color: Colors.tealAccent,
+                    ),
+                    title: const Text(
+                      'Completed',
+                      style: TextStyle(
+                        color: Colors.tealAccent,
+                      ),
+                    )),
+                BottomNavyBarItem(
+                    icon: const Icon(
+                      Icons.favorite,
+                      color: Colors.tealAccent,
+                    ),
+                    title: const Text(
+                      'Favourites',
+                      style: TextStyle(
+                        color: Colors.tealAccent,
+                      ),
+                    )),
+              ],
+              onItemSelected: (index) {
                 cubit.changeIndex(index);
               },
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: primaryColor,
-              selectedItemColor: blue,
-              unselectedItemColor: lightBlue,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.menu,
-                  ),
-                  label: 'All',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.close_outlined,
-                  ),
-                  label: 'Uncompleted',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.check_circle_outline,
-                  ),
-                  label: 'Completed',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.favorite,
-                  ),
-                  label: 'Favourite',
-                ),
-              ],
+              selectedIndex: cubit.currentIndex,
             ),
-          );
-        },
-      );
+          ),
+        );
+      },
+    );
   }
 }

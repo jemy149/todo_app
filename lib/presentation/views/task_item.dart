@@ -44,170 +44,176 @@ class TaskItem extends StatelessWidget {
 
           padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
 
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                  height: 5.h,
-                  width: 90.w,
-                  decoration: const BoxDecoration(
-                    color: primaryColor,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 1.h),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.only(start: 2.w),
-                            child: DefaultText(
-                              text: '${model['title']}',
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.bold,
-                              maxLines: 3,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        DefaultText(
-                          text: '${model['date']}',
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.bold,
-                          color: lightBlue,
-                          maxLines: 2,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-
-
-                        Flexible(
-                          child: DefaultText(
-                            text: 'Starts at: ${model['startTime']}',
-                            fontSize: 12.sp,
-                            color: gray!,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-
-                        Flexible(
-                          child: DefaultText(
-                            text: 'Ends at: ${model['endTime']}',
-                            fontSize: 12.sp,
-                            color: gray!,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+          child: Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.sp)),
+            color: primaryColor,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                    width: 90.w,
+                    padding: EdgeInsets.symmetric(horizontal: 1.w,vertical: 1.h),
+                    child: Center(
+                      child: Column(
                         children: [
-                          const Icon(Icons.alarm, color: Colors.red,),
-                          DefaultText(
-                            text: '${model['reminder']}',
-                            fontSize: 10.sp,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.only(start: 2.w,bottom: 3.h,top: 1.h),
+                                  child: DefaultText(
+                                    text: '${model['title']}',
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.bold,
+                                    maxLines: 3,
+                                    color: Colors.teal,
+                                  ),
+                                ),
+                              ),
+
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: SizedBox(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Flexible(
+                                        child: DefaultText(
+                                          text: 'Starting: ${model['startTime']}',
+                                          fontSize: 9.sp,
+                                          color: lightBlue,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+
+                                      Flexible(
+                                        child: DefaultText(
+                                          text: 'Ending: ${model['endTime']}',
+                                          fontSize: 9.sp,
+                                          color: lightBlue,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Flexible(child:   Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          DefaultText(
+                                            text: '${model['reminder']}',
+                                            fontSize: 8.sp,
+                                            color: lightBlue,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ],
+                                      ),)
+                                    ],
+                                  ),
+                                  height: 8.h,
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  SizedBox(
+                                    height: 2.h,
+                                  ),
+                                  DefaultText(
+                                    text: '${model['date']}',
+                                    fontSize: 8.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: lightBlue,
+                                    maxLines: 2,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  Row(
+                                    children: [
+                                      model['status'] == 'completed' ? const SizedBox()
+                                          : IconButton(
+                                        onPressed: (){
+
+                                          AppCubit.get(context).changeStatus(
+
+                                            status: 'completed',
+
+                                            id: model['id'],
+
+                                          );},
+
+                                        icon: const Icon(
+                                          Icons.check_circle,
+                                          color: Colors.tealAccent,
+
+                                        ),
+
+                                      ),
+
+                                      model['status'] == 'uncompleted' ? const SizedBox()
+                                          : IconButton(
+                                        onPressed: (){
+
+                                          AppCubit.get(context).changeStatus(
+
+                                            status: 'uncompleted',
+
+                                            id: model['id'],
+
+                                          );},
+
+                                        icon: const Icon(
+
+                                          Icons.close,
+
+                                          color: Colors.teal,
+
+                                        ),
+
+                                      ),
+
+                                      model['status'] == 'favorite' ? const SizedBox()
+                                          : IconButton(
+                                        onPressed: (){
+
+                                          AppCubit.get(context).changeStatus(
+
+                                            status: 'favorite',
+
+                                            id: model['id'],
+
+                                          );},
+
+                                        icon: const Icon(
+
+                                          Icons.favorite,
+
+                                          color: Colors.tealAccent,
+
+                                        ),
+
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+
+                            ],
+
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          model['status'] == 'completed' ? const SizedBox()
-                              : IconButton(
-                            onPressed: (){
+                    ),
+                  ),],
+                ),
 
-                            AppCubit.get(context).changeStatus(
-
-                              status: 'completed',
-
-                              id: model['id'],
-
-                            );},
-
-                            icon: const Icon(
-
-                              Icons.check_circle,
-
-                              color: primaryColor,
-
-                            ),
-
-                          ),
-
-                          model['status'] == 'uncompleted' ? const SizedBox()
-                              : IconButton(
-                            onPressed: (){
-
-                            AppCubit.get(context).changeStatus(
-
-                              status: 'uncompleted',
-
-                              id: model['id'],
-
-                            );},
-
-                            icon: const Icon(
-
-                              Icons.close_outlined,
-
-                              color: primaryColor,
-
-                            ),
-
-                          ),
-
-                          model['status'] == 'favorite' ? const SizedBox()
-                              : IconButton(
-                            onPressed: (){
-
-                            AppCubit.get(context).changeStatus(
-
-                              status: 'favorite',
-
-                              id: model['id'],
-
-                            );},
-
-                            icon: const Icon(
-
-                              Icons.favorite,
-
-                              color: Colors.red,
-
-                            ),
-
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-
-                ],
-
-              ),
-            ],
+              ],
+            ),
           ),
 
         ),

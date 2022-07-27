@@ -170,17 +170,19 @@ class AppCubit extends Cubit<AppStates>{
 
   bool isBottomSheetShown = false;
   IconData fabIcon = Icons.edit;
-
+  Color floatingButtonColor = Colors.tealAccent;
   void changeBSState({
   required bool isShow,
   required IconData icon,
+    required Color color,
   }){
     isBottomSheetShown = isShow;
     fabIcon = icon;
+    floatingButtonColor = color;
     emit(AppChangeBSState());
   }
 
-  void setReminder(
+  void settingReminder(
       String title,
       DateTime selectedDate,
       TimeOfDay selectedStartTime,
