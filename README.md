@@ -1,6 +1,9 @@
 # todo_app
-
+Algoriza phase 1 ,
 todo app made by 271.
+
+![Screenshot_2022-07-28-01-32-22-810_com example todo_app](https://user-images.githubusercontent.com/53702799/181390427-672c11ec-305f-461a-95be-d58e98f61b31.jpg)
+
 
 ## Getting Started
 
