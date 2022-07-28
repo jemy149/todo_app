@@ -2,6 +2,7 @@
 Algoriza phase 1 ,
 todo app made by 271.
 
+https://user-images.githubusercontent.com/53702799/181392036-3600da5d-4860-42e1-b412-80c7c7a33ac9.mp4
 
 ![1](https://user-images.githubusercontent.com/53702799/181390636-daf71ff1-8f67-4b0a-a030-bf5a26687134.jpg)
 
@@ -13,7 +14,7 @@ todo app made by 271.
 
 ![7](https://user-images.githubusercontent.com/53702799/181392086-b1c8d9bb-2c88-4d8e-9a4e-5a4cb265e63e.jpg)
 
-https://user-images.githubusercontent.com/53702799/181392036-3600da5d-4860-42e1-b412-80c7c7a33ac9.mp4
+
 
 
 
